@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from models.models import Temperature
+import frontend
+
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -45,7 +47,8 @@ router.register(r'users', UserViewSet)
 router.register(r'temperature', TempViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', include('frontend.urls')),
+    path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
